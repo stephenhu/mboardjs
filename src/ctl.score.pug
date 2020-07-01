@@ -1,0 +1,82 @@
+extends layout.pug
+
+block content
+  div(class="container-fluid m-5")
+    div(class="row")
+      div(class="col")
+        h3(class="display-3 text-uppercase text-info" id="away") Cavaliers
+        h1(class="dipslay-1" id="awayScore") 0
+      div(class="col")
+        h3(class="display-3 text-uppercase text-info text-right" id="home") Lakers
+        h1(class="dipslay-1 text-right" id="homeScore") 0
+    div(class="row")
+      div(class="col")
+        h5(class="display-4 text-info") Fouls
+        h4(class="display-4 text-primary" id="awayFouls") 3
+      div(class="col")
+        h5(class="display-4 text-info text-right") Fouls
+        h4(class="display-4 text-primary text-right" id="homeFouls") 3
+  div(class="container-fluid fixed-bottom mb-5")
+    div(class="row mt-5")
+      div(class="col")
+        div(class="btn-group float-right")
+          button(class="btn btn-ouline-info rounded-circle p5 mr-3" onclick="scoreCommand('SCORE_AWAY', 1); return false;")
+            span(class="fas fa-plus fa-3x")
+          button(class="btn btn-ouline-info rounded-circle p5 mr-3" onclick="scoreCommand('SCORE_AWAY', -1); return false;")
+            span(class="fas fa-plus fa-3x")
+      div(class="col align-middle")
+        h2(class="display-3 text-center") 1 PT
+      div(class="col")
+        div(class="btn-group")
+          button(class="btn btn-ouline-info rounded-circle p5 mr-3" onclick="scoreCommand('SCORE_HOME', 1); return false;")
+            span(class="fas fa-plus fa-3x")
+          button(class="btn btn-ouline-info rounded-circle p5 mr-3" onclick="scoreCommand('SCORE_HOME', -1); return false;")
+            span(class="fas fa-plus fa-3x")
+    div(class="row mt-5")
+      div(class="col")
+        div(class="btn-group float-right")
+          button(class="btn btn-ouline-info rounded-circle p5 mr-3" onclick="scoreCommand('SCORE_AWAY', 2); return false;")
+            span(class="fas fa-plus fa-3x")
+          button(class="btn btn-ouline-info rounded-circle p5 mr-3" onclick="scoreCommand('SCORE_AWAY', -2); return false;")
+            span(class="fas fa-plus fa-3x")
+      div(class="col align-middle")
+        h2(class="display-3 text-center") 2 PT
+      div(class="col")
+        div(class="btn-group")
+          button(class="btn btn-ouline-info rounded-circle p5 mr-3" onclick="scoreCommand('SCORE_HOME', 2); return false;")
+            span(class="fas fa-plus fa-3x")
+          button(class="btn btn-ouline-info rounded-circle p5 mr-3" onclick="scoreCommand('SCORE_HOME', -2); return false;")
+            span(class="fas fa-plus fa-3x")
+    div(class="row mt-5")
+      div(class="col")
+        div(class="btn-group float-right")
+          button(class="btn btn-ouline-info rounded-circle p5 mr-3" onclick="scoreCommand('SCORE_AWAY', 3); return false;")
+            span(class="fas fa-plus fa-3x")
+          button(class="btn btn-ouline-info rounded-circle p5 mr-3" onclick="scoreCommand('SCORE_AWAY', -3); return false;")
+            span(class="fas fa-plus fa-3x")
+      div(class="col align-middle")
+        h2(class="display-3 text-center") 3 PT
+      div(class="col")
+        div(class="btn-group")
+          button(class="btn btn-ouline-info rounded-circle p5 mr-3" onclick="scoreCommand('SCORE_HOME', 3); return false;")
+            span(class="fas fa-plus fa-3x")
+          button(class="btn btn-ouline-info rounded-circle p5 mr-3" onclick="scoreCommand('SCORE_HOME', -3); return false;")
+            span(class="fas fa-plus fa-3x")
+    div(class="row mt-5")
+      div(class="col")
+        div(class="btn-group float-right")
+          button(class="btn btn-ouline-info rounded-circle p5 mr-3" onclick="scoreCommand('FOUL_AWAY_UP'); return false;")
+            span(class="fas fa-plus fa-3x")
+          button(class="btn btn-ouline-info rounded-circle p5 mr-3" onclick="scoreCommand('FOUL_AWAY_DOWN'); return false;")
+            span(class="fas fa-plus fa-3x")
+      div(class="col align-middle")
+        h2(class="display-3 text-center") 1 PT
+      div(class="col")
+        div(class="btn-group")
+          button(class="btn btn-ouline-info rounded-circle p5 mr-3" onclick="scoreCommand('FOUL_HOME_UP'); return false;")
+            span(class="fas fa-plus fa-3x")
+          button(class="btn btn-ouline-info rounded-circle p5 mr-3" onclick="scoreCommand('FOUL_HOME_DOWN'); return false;")
+            span(class="fas fa-plus fa-3x")
+  script.
+    subscribe();
+    scoreSocket();

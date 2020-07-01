@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "ads.pug",
+    "ctl.clock.pug",
+    "ctl.score.pug",
+    "gameconfig.pug",
+    "home.pug",
+    "index.pug",
+    "media.pug",
+    "monitor.pug",
+    "notfound.pug",
+    "scoreboard.pug",
+    "settings.pug"
+  ]
+}

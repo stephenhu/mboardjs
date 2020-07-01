@@ -1,0 +1,43 @@
+extends layout.pug
+
+block content
+  div(class="container-fluid m-5")
+    div(class="row")
+      div(class="col-xl-8")
+        h1(class="too-big shade text-success text-center" id="clock") 12:00
+      div(class="col-xl-2")
+        h1(class="middle-big shade text-info" id="period") 1st
+      div(class="col-xl-2")
+        h1(class="middle-big shade text-success text-center" id="shot") 24
+    div(class="row")
+      div(class="col-xl-6")
+        h1(class="medium text-center shade text-info" id="away") Bulls
+        h1(class="too-big text-center shade" id="awayScore") 89
+      div(class="col-xl-6")
+        h1(class="medium text-center shade text-info" id="home") Jazz
+        h1(class="too-big text-center shade" id="homeScore") 84
+    div(class="row")
+      div(class="col-xl-1")
+        p(class="regular text-info") Fouls
+      div(class="col-xl-1")
+        p(class="regular text-success ml-2" id="awayFouls") 8
+      div(class="col-xl-2")
+        p(class="regular text-info float-right") Timeouts
+      div(class="col-xl-2")
+        div(id="awayTimeouts")
+          span(class="fas fa-circle regular text-success text-right")
+          span(class="fas fa-circle regular text-success text-right")
+          span(class="fas fa-circle regular text-success text-right")
+      div(class="col-xl-1")
+        p(class="regular text-info") Fouls
+      div(class="col-xl-1")
+        p(class="regular text-success ml-2" id="homeFouls") 7
+      div(class="col-xl-2")
+        p(class="regular text-info float-right") Timeouts
+      div(class="col-xl-2")
+        div(id="homeTimeouts")
+          span(class="fas fa-circle regular text-success text-right")
+          span(class="fas fa-circle regular text-success text-right")
+          span(class="fas fa-circle regular text-success text-right")
+  script.
+    subscribe();

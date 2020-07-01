@@ -1,0 +1,49 @@
+extends layout.pug
+
+block content
+  div(class="container-fluid mt-3")
+    div(class="row")
+      div(class="col")
+        div(class="card-group")
+          div(class="card bg-dark")
+            div(class="card-header") Game configuration
+            div(class="card-body")
+              div(class="card-title h5") Periods
+              div(class="mt-1 btn-group btn-group-toggle" id="periods" defaultValue="4")
+                label(class="rounded mr-2 btn btn-outline-info") None
+                  input(type="radio" name="periods" value="0" onChange="toggleSel('periods', this.value); return false;")
+                label(class="rounded mr-2 btn btn-outline-info") 2
+                  input(type="radio" name="periods" value="2" onChange="toggleSel('periods', this.value); return false;")
+                label(class="rounded mr-2 btn btn-outline-info") 4
+                  input(type="radio" name="periods" value="4" onChange="toggleSel('periods', this.value); return false;")
+            div(class="card-body")
+              div(class="form-group")
+                label(class="form-label h5") Minutes per period
+                label(class="ml-2 h2 text-info form-label" id="minutesLabel") 12
+                input.form-control-range(min="1" max="30" steps="1" type="range" id="minutes" value="12" onchange="toggleSlider('minutes', this.value); return false;")
+            div(class="card-body")
+              div(class="form-group")
+                label(class="form-label h5") Shot clock
+                label(class="ml-2 h2 text-info form-label" id="shotLabel") 24
+                input.form-control-range(min="0" max="40" steps="1" type="range" id="shot" value="24" onchange="toggleSlider('shot', this.value); return false;")
+            div(class="card-body")
+              div(class="form-group")
+                label(class="form-label h5") Timeouts per half
+                label(class="ml-2 h2 text-info form-label" id="timeoutsLabel") 3
+                input.form-control-range(min="1" max="30" steps="1" type="range" id="timeouts" value="3" onchange="toggleSlider('timeouts', this.value); return false;")
+            div(class="card-body")
+              div(class="form-group")
+                label(class="form-label h5") Fouls per half
+                label(class="ml-2 h2 text-info form-label" id="minutesLabel") 7
+                input.form-control-range(min="1" max="30" steps="1" type="range" id="fouls" value="7" onchange="toggleSlider('fouls', this.value); return false;")
+            div(class="card-body")
+              div(class="form-group")
+                label(class="form-label h5") Away team
+                input.form-control(type="text" id="away" value="Red")
+            div(class="card-body")
+              div(class="form-group")
+                label(class="form-label h5") Home team
+                input.form-control(type="text" id="home" value="Blue")
+            div(class="card-body")
+              button(class="btn btn-success btn-lg" onclick="newGame(); return false;") Start game
+              a(class="btn btn-outline-info btn-lg ml-2" href="/home") Cancel

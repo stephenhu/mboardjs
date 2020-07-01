@@ -1,0 +1,22 @@
+extends layout.pug
+
+block content
+  div(class="container-fluid")
+    div(class="row mt-3")
+      div(class="col")
+        div(class="btn-group btn-group-toggle")
+          label(class="btn btn-outline-info rounded")
+            span(class="fas fa-home fa-5x m-2")
+          a(class="btn btn-outline-info rounded" href="/media")
+            span(class="fas fa-photo-video fa-5x m-2")
+          a(class="btn btn-outline-info rounded" href="/ads")
+            span(class="fas fa-ad fa-5x m-2")
+          a(class="btn btn-outline-info rounded" href="/monitor")
+            span(class="fas fa-chart-pie fa-5x m-2")
+          a(class="btn btn-outline-info rounded" href="/settings")
+            span(class="fas fa-cog fa-5x m-2")
+        a(class="btn btn-success float-right" href="/gameconfig")
+          span(class="fas fa-basketball-ball fa-5x m-2")
+    div(class="row mt-5")
+      div(class="col")
+        div(class="card-group" id="games")
