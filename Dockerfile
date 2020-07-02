@@ -2,7 +2,7 @@ FROM node:12 as builder
 WORKDIR /app
 COPY . .
 RUN npm install
-RUN node build.js
+RUN npm run build
 
 FROM nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf

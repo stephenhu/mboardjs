@@ -17,8 +17,20 @@ function toHtml(filename) {
 } // toHtml
 
 
-function getDirs(dir) {
-  return path.dirname(dir).split("/");
+function getDirs(dir, isDir) {
+
+  if(isDir) {
+
+    var ret = path.dirname(dir).split("/");
+
+    ret.push(path.basename(dir));
+
+    return ret;
+
+  } else {
+    return path.dirname(dir).split("/");
+  }
+
 } // getDirs
 
 
@@ -31,9 +43,9 @@ function checkBuildDir() {
 } // checkBuildDir
 
 
-function checkDirs(dir) {
+function checkDirs(dir, isDir) {
 
-  var dirs = getDirs(dir);
+  var dirs = getDirs(dir, isDir);
 
   var str = "";
 
@@ -65,6 +77,31 @@ function cp(src, dest) {
 } // cp
 
 
+function cpa(src, dest) {
+
+  if(fs.lstatSync(src).isDirectory()) {
+
+    checkDirs(dest, true);
+
+    const files = fs.readdirSync(src);
+
+    files.forEach(file => {
+
+      fs.copyFile(path.join(src, file), path.join(dest, file), (err) => {
+        if(err) {
+          console.log(err);
+        }
+      });
+
+    });
+
+  } else {
+    console.log("Please call cp() instead to copy files, cpa() is used to copy directory contents.");
+  }
+
+} // cpa
+
+
 // compile templates
 
 for(var i = 0; i < site.pages.length; i++) {
@@ -87,6 +124,7 @@ for(var i = 0; i < site.pages.length; i++) {
 cp("node_modules/bootstrap/dist/css/bootstrap.min.css", "build/bootstrap/css/bootstrap.min.css");
 cp("node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css", "build/fontawesome/css/fontawesome.min.css");
 cp("node_modules/@fortawesome/fontawesome-free/css/all.min.css", "build/fontawesome/css/all.min.css");
+cpa("node_modules/@fortawesome/fontawesome-free/webfonts", "build/fontawesome/webfonts");
 cp("src/css/mboard.css", "build/css/mboard.css");
 cp("src/js/mboard.js", "build/js/mboard.js");
 

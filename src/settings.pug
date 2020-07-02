@@ -7,13 +7,13 @@ block content
         div(class="btn-group btn-group-toggle")
           a(class="btn btn-outline-info rounded" href="/home")
             span(class="fas fa-home fa-5x m-2")
-          a(class="btn btn-outline-info rounded" href="/media")
+          a(class="btn btn-outline-info rounded ml-2" href="/media")
             span(class="fas fa-photo-video fa-5x m-2")
-          a(class="btn btn-outline-info rounded" href="/ads")
+          a(class="btn btn-outline-info rounded ml-2" href="/ads")
             span(class="fas fa-ad fa-5x m-2")
-          a(class="btn btn-outline-info rounded" href="/monitor")
+          a(class="btn btn-outline-info rounded ml-2" href="/monitor")
             span(class="fas fa-chart-pie fa-5x m-2")
-          label(class="btn btn-outline-info rounded")
+          label(class="btn btn-outline-info rounded ml-2 active")
             span(class="fas fa-cog fa-5x m-2")
         a(class="btn btn-success float-right" href="/gameconfig")
           span(class="fas fa-basketball-ball fa-5x m-2")
@@ -40,3 +40,37 @@ block content
               div(class="card-subtitle text-info h6") mboard
                 a(href="")
                   span(class="fas fa-wrench text-info ml-3")
+          div(class="card bg-dark ml-2")
+            div(class="card-header") User interface
+            div(class="card-body")
+              div(class="card-title h5") Themes
+              div(class="card-subtitle h6")
+              div(class="mt-1 btn-group btn-group-toggle")
+                label(class="rounded mr-2 btn btn-outline-info active") Default
+                  input(type="radio" checked)
+                label(class="rounded mr-2 btn btn-outline-info") Dark
+                  input(type="radio")
+                label(class="rounded mr-2 btn btn-outline-info") Future
+                  input(type="radio")
+                label(class="rounded mr-2 btn btn-outline-info") Light
+                  input(type="radio")
+            div(class="card-footer")
+              small(class="text-muted") 5h
+          div(class="card bg-dark ml-2")
+            div(class="card-header") Device
+            div(class="card-body")
+              div(class="card-title h5") Operations
+              button(class="btn btn-outline-danger")
+                span(class="fas fa-redo")
+              button(class="btn btn-outline-warning ml-2")
+                span(class="fas fa-power-off")
+            div(class="card-footer")
+              small(class="text-muted") 5h
+          div(class="card bg-dark ml-2")
+            div(class="card-header") Updates
+            div(class="card-body")
+              div(class="card-title h5") Version
+              div(class="card-subtitle h6") 1.0.6
+              button(class="btn btn-outline-success mt-3") Check for updates
+            div(class="card-footer")
+              small(class="text-muted") 5h
