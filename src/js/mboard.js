@@ -1,10 +1,10 @@
 // mboard.js
 
 const REST_API          = "/api";
-const WS_SUBSCRIBER     = "ws://localhost:8000/ws/subscribers";
-const WS_SCORE          = "ws://localhost:8000/ws/scores";
-const WS_CLOCK          = "ws://localhost:8000/ws/clocks";
-const WS_MANAGER        = "ws://localhost:8000/ws/manager";
+const WS_SUBSCRIBER     = "ws://localhost/ws/subscribers";
+const WS_SCORE          = "ws://localhost/ws/scores";
+const WS_CLOCK          = "ws://localhost/ws/clocks";
+const WS_MANAGER        = "ws://localhost/ws/manager";
 
 const API_PARAM_GAME_CONFIG = "gameConfig";
 
@@ -286,22 +286,22 @@ function togglePossession() {
 } // togglePossession
 
 
-function callTimeout() {
+function callTimeout(team, cancelTimeout) {
 
-  if(t === "HOME") {
+  if(team === "HOME") {
 
-    if(s === 1) {
-      command("HOME_TIMEOUT");
+    if(cancelTimeout) {
+      clockCommand("TIMEOUT_HOME_CANCEL");
     } else {
-      command("HOME_TIMEOUT_CANCEL");
+      clockCommand("TIMEOUT_HOME");
     }
 
   } else {
 
-    if(s === 1) {
-      command("AWAY_TIMEOUT");
+    if(cancelTimeout) {
+      clockCommand("TIMEOUT_AWAY_CANCEL");
     } else {
-      command("AWAY_TIMEOUT_CANCEL");
+      clockCommand("TIMEOUT_AWAY");
     }
 
   }
@@ -420,6 +420,65 @@ function updatePeriod(v) {
 } // updatePeriod
 
 
+function updateTimeoutLabel(team, count) {
+
+  var el      = null;
+  var name    = null;
+
+  if(team === "HOME") {
+    el    = document.getElementById("homeTimeout");
+    name  = document.getElementById("homePos");
+  } else {
+    el    = document.getElementById("awayTimeout");
+    name  = document.getElementById("awayPos");
+  }
+
+  if(el === null || name === null) {
+    return;
+  }
+
+  el.innerText = `${name.innerText} timeouts (${count})`;
+
+} // updateTimeoutLabel
+
+
+function updateTimeoutStars(team, count) {
+
+  var el = null;
+
+  if(team === "HOME") {
+    el = document.getElementById("homeTimeouts");
+  } else {
+    el = document.getElementById("awayTimeouts");
+  }
+
+  if(el === null) {
+    return;
+  }
+
+  el.innerHTML = "";
+
+  console.log(count);
+
+  if(count > 6) {
+    console.log("Timeouts have exceeded the total");
+  } else {
+
+    for(var i = 0; i < count; i++) {
+
+      var star = document.createElement("span");
+
+      star.setAttribute("class", "fas fa-circle regular text-success text-right");
+
+      el.appendChild(star);
+
+    }
+
+  }
+
+} // updateTimeoutStars
+
+
 function updateState(o) {
 
   if(o.final) {
@@ -443,6 +502,18 @@ function updateState(o) {
 
     updateTeamPos("HOME", o.state.home.name);
     updateTeamPos("AWAY", o.state.away.name);
+
+    if(o.state.possession) {
+      updatePossession("HOME");
+    } else {
+      updatePossession("AWAY");
+    }
+
+    updateTimeoutLabel("HOME", o.state.home.timeouts);
+    updateTimeoutLabel("AWAY", o.state.away.timeouts);
+
+    updateTimeoutStars("HOME", o.state.home.timeouts);
+    updateTimeoutStars("AWAY", o.state.away.timeouts);
 
     updateClock(o.state.game, o.state.shot, o.state.settings.minutes,
       o.state.settings.shot);
@@ -479,7 +550,7 @@ function newGame() {
   })
   .then((data) => {
     console.log(data);
-    window.location = `/clockctl/${data}`;
+    window.location = `/control/clock?id=${data}`;
   })
   .catch((error) => {
     console.log(error);
@@ -594,6 +665,28 @@ function listener(obj) {
       updateFouls("AWAY", obj.val);
       break;
 
+    case "HOME_TIMEOUT":
+      playButton();
+      updateTimeoutLabel("HOME", obj.val);
+      updateTimeoutStars("HOME", obj.val);
+      break;
+
+    case "HOME_TIMEOUT_CANCEL":
+      updateTimeoutLabel("HOME", obj.val);
+      updateTimeoutStars("HOME", obj.val);
+      break;
+
+    case "AWAY_TIMEOUT":
+      playButton();
+      updateTimeoutLabel("AWAY", obj.val);
+      updateTimeoutStars("AWAY", obj.val);
+      break;
+
+    case "AWAY_TIMEOUT_CANCEL":
+      updateTimeoutLabel("AWAY", obj.val);
+      updateTimeoutStars("AWAY", obj.val);
+      break;
+
     case "GAME_STATE":
       updateState(obj);
       break;
@@ -640,14 +733,9 @@ function listener(obj) {
 
 function getId() {
 
-  var p = window.location.pathname.split("/");
+  var urlParams = new URLSearchParams(window.location.search);
 
-  if(p.length > 0) {
-    return p[p.length-1];
-  } else {
-    return "";
-  }
-
+  return urlParams.get("id");
 
 } // getId
 

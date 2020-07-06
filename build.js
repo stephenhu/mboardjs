@@ -107,6 +107,7 @@ function cpa(src, dest) {
 for(var i = 0; i < site.pages.length; i++) {
 
   checkBuildDir();
+  checkDirs(path.join(buildDir, site.pages[i]), false);
 
   const fn = pug.compileFile(path.join("src", site.pages[i]));
 
@@ -121,10 +122,22 @@ for(var i = 0; i < site.pages.length; i++) {
 
 // copy assets
 
-cp("node_modules/bootstrap/dist/css/bootstrap.min.css", "build/bootstrap/css/bootstrap.min.css");
-cp("node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css", "build/fontawesome/css/fontawesome.min.css");
-cp("node_modules/@fortawesome/fontawesome-free/css/all.min.css", "build/fontawesome/css/all.min.css");
-cpa("node_modules/@fortawesome/fontawesome-free/webfonts", "build/fontawesome/webfonts");
+cp("node_modules/bootstrap/dist/css/bootstrap.min.css",
+  "build/bootstrap/css/bootstrap.min.css");
+
+cp("node_modules/bootstrap/dist/css/bootstrap.min.css.map",
+  "build/bootstrap/css/bootstrap.min.css.map");
+
+cp("node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css",
+  "build/fontawesome/css/fontawesome.min.css");
+
+cp("node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+  "build/fontawesome/css/all.min.css");
+
+cpa("node_modules/@fortawesome/fontawesome-free/webfonts",
+  "build/fontawesome/webfonts");
+
 cp("src/css/mboard.css", "build/css/mboard.css");
+
 cp("src/js/mboard.js", "build/js/mboard.js");
 

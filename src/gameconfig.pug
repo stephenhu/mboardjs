@@ -30,12 +30,12 @@ block content
               div(class="form-group")
                 label(class="form-label h5") Timeouts per half
                 label(class="ml-2 h2 text-info form-label" id="timeoutsLabel") 3
-                input.form-control-range(min="1" max="30" steps="1" type="range" id="timeouts" value="3" onchange="toggleSlider('timeouts', this.value); return false;")
+                input.form-control-range(min="1" max="6" steps="1" type="range" id="timeouts" value="3" onchange="toggleSlider('timeouts', this.value); return false;")
             div(class="card-body")
               div(class="form-group")
                 label(class="form-label h5") Fouls per half
                 label(class="ml-2 h2 text-info form-label" id="minutesLabel") 7
-                input.form-control-range(min="1" max="30" steps="1" type="range" id="fouls" value="7" onchange="toggleSlider('fouls', this.value); return false;")
+                input.form-control-range(min="1" max="10" steps="1" type="range" id="fouls" value="7" onchange="toggleSlider('fouls', this.value); return false;")
             div(class="card-body")
               div(class="form-group")
                 label(class="form-label h5") Away team
